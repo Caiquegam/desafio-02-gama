@@ -51,7 +51,7 @@ article.evento p {
 }
 article.evento h2 {
     display: -webkit-box;
-    -webkit-line-clamp: 1;
+    -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
     min-height: 82px;

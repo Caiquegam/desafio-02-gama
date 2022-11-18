@@ -10,7 +10,6 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="./css/admin.css">
 </head>
 
 <body>
@@ -26,7 +25,7 @@
                         <img src="img/Sound-logo.png" alt="Gama Lounge" class="img-responsive">
                     </span>
                 </a>
-                <p class="text-center">Painel administrativo</p>
+                <p class="text-center">painel administrativo</p>
                 <hr>
                 <ul class="nav nav-pills flex-column mb-auto">
                     <li class="nav-item">
@@ -54,31 +53,44 @@
                 <hr>
 
             </aside>
-            <main id="principal" class="col-9  p-5">
+            <main class="col-9  p-5">
                 <div class="my-5">
-                    <h1>Gerenciamento de eventos</h1>
-                    <a href="cadastro-evento.html" class="btn btn-primary">Novo Evento</a>
+                    <h1>Criar Reserva</h1>
+
                 </div>
-                <section class="sectionAdmin">
-                    <div class="bd-example">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">Data</th>
-                                    <th scope="col">Titulo</th>
-                                    <th scope="col">Atrações</th>
-                                    <th scope="col">Ações</th>
-                                </tr>
-                            </thead>
-                </section>
+                <div>
+                    <!-- - cadastro de evento (nome, atrações, descrição, horário, data, numero de ingressos) -->
+                    <form class="col-6" onsubmit = "cadastrarEvento(event)">
+                        <div class="mb-3">
+                            <label for="nome" class="form-label">Nome</label>
+                            <input type="text" class="form-control" id="nome" aria-describedby="nome">
+                        </div>
+                        <div class="mb-3">
+                            <label for="link" class="form-label">Email</label>
+                            <input type="link" class="form-control" id="link" aria-describedby="link">
+                        </div>
+                        <div class="mb-3">
+                            <label for="lotacao" class="form-label">Número de Ingressos</label>
+                            <input type="number" class="form-control" id="lotacao" aria-describedby="lotacao">
+                        </div>
+                        <div class="mb-3">
+                            <select name="atracoes" id="atracoes">Atrações</select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="descricao" class="form-label">Descrição</label>
+                            <textarea name="descricao" id="descricao" class="form-control" rows="5"></textarea>
+                        </div>
+                            
+                        <button type="submit" class="btn btn-primary" >enviar</button>
+                    </form>
+                </div>
             </main>
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
-        </script>
-    <script src="./js/admin.js"></script>
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous" ></script>
+    
+    <script src=""></script>
 </body>
 
 </html>

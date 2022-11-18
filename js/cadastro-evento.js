@@ -13,7 +13,7 @@ async function cadastrarEvento(event) {
       poster: link,
       attractions: atracao,
       description: descricao,
-      scheduled: new Date(data).toISOString(),
+      scheduled: new Date(data).toLocaleDateString(),
       number_tickets: lotacao,
     };
   
@@ -24,7 +24,8 @@ async function cadastrarEvento(event) {
       method: "POST",
       body: JSON.stringify(dataObjeto),
     });
-  
+
+   
     limparFormulario("#nome");
     limparFormulario("#link");
     limparFormulario("#atracoes");

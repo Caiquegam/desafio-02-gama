@@ -1,42 +1,47 @@
-const params = window.location.search
-const urlParams = new URLSearchParams(params)
-const id = parseFloat(urlParams.get('id'));
 
-let inputNome = document.querySelector("#nome")
-let inputBanner= document.querySelector("#banner")
-let inputAtracao = document.querySelector("#atracoes") 
-let inputDescricao = document.querySelector("#descricao") 
-let inputData = document.querySelector("#data") 
-let inputLotacao = document.querySelector("#lotacao") 
+const nome = document.querySelector("#nome");
+const banner = document.querySelector("#banner");
+const atracoes = document.querySelector("#atracoes");
+const descricao = document.querySelector("#descricao");
+const data = document.querySelector("#data");
+const lotacao = document.querySelector("#lotacao");
+const form = document.querySelector("form");
 
+const id = new URLSearchParams(window.location.search).get("id");
 
-function pegarEvento(){
-    fetch(`https://xp41-soundgarden-api.herokuapp.com/events/${id}`)
-   .then(response => response.json)
-   .then(result => preencherFormulario(result))
+async function listarEvento() {
+  const options = {
+    method: "GET",
+    redirect: "follow",
+    headers: { "Content-Type": "application/json" },
+  };
+  const resposta = await fetch(`https://xp41-soundgarden-api.herokuapp.com/events/${id}`, options);
+
+  const conteudoResposta = await resposta.json();
+  nome.value = conteudoResposta.name;
+  banner.value = conteudoResposta.poster;
+  atracoes.value = conteudoResposta.attractions;
+  descricao.value = conteudoResposta.description;
+  data.value = conteudoResposta.scheduled.slice(0, 16);
+  lotacao.value = conteudoResposta.number_tickets;
 }
+listarEvento();
 
-function preencherFormulario(event){
-   inputNome.value = event.name,
-   inputBanner.value = event.poster,
-   inputAtracao.value =  event.attractions,
-   inputDescricao.value = event.description,
-   inputData.value =  event.scheduled,
-   inputLotacao.value =  event.number_tickets
+form.onsubmit = async (evento) => {
+  evento.preventDefault();
 
-}
-  
-const btnDeletarEvento = document.querySelector("#deletarEvento");
-
-async function deletarEvento() {
-     
-await fetch(`https://xp41-soundgarden-api.herokuapp.com/events/${id}`, {
-    headers: {
-      "Content-Type": "application/json",
-    },
+  const options = {
     method: "DELETE",
-  });
+    headers: { "Content-Type": "application/json" },
+    redirect: "follow",
+  };
 
-}
-btnDeletarEvento.onclick = deletarEvento;
-
+  const resposta = await fetch(`https://xp41-soundgarden-api.herokuapp.com/events/${id}`, options);
+  if (resposta.status == 204) {
+    alert("Evento excluido com sucesso!!");
+    window.location.href =
+      window.location.pathname == "/SoundGarden/excluir-evento.html"
+        ? `${window.location.origin}/SoundGarden/admin.html`
+        : `${window.location.origin}/admin.html`;
+  }
+};
